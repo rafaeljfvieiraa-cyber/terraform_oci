@@ -1,5 +1,7 @@
+#### Esse arquivo é o "Core" da stack, tendo o papel de criar uma instância de computação na OCI.
+
 module "create_instance" {
-  source = "./modules/compute_instance"
+  source = "./modules/compute_instance" 
 
   availability_domain = var.availability_domain
   compartment_id      = var.compartment_id
