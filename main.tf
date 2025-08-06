@@ -43,3 +43,9 @@ output "instance_id" {
   description = "OCID da instância criada."
   value       = module.create_instance.instance_id
 }
+
+terraform {
+  backend "oci" {
+    source = ".backend_oci/backend.tf"
+  }
+}

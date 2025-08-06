@@ -28,3 +28,5 @@ variable "user_data" {
   default     = "" # Pode ser um caminho para um script, ou vazio se não for necessário.
   
 }
+variable "namespace" {}
+variable "bucket_name" {}
