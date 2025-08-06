@@ -20,13 +20,11 @@ variable "assign_public_ip" {
 variable "shape" {
   description = "Shape da instância."
   type        = string
-  default     = "VM.Standard.E4.Flex"  
+  default     = "VM.Standard.E4.Flex"
 }
 variable "user_data" {
   description = "/terraform/create_instancesoci/scripts/bootstrap.sh"
   type        = string
   default     = "" # Pode ser um caminho para um script, ou vazio se não for necessário.
-  
+
 }
-variable "namespace" {}
-variable "bucket_name" {}

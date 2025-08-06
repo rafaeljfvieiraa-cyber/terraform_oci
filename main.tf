@@ -1,7 +1,17 @@
 #### Esse arquivo é o "Core" da stack, tendo o papel de criar uma instância de computação na OCI.
 
+
+terraform {
+  backend "oci" {
+    bucket  = "terraform-state"
+    namespace    = "seu namespace"
+    region       = "sua região"
+    tenancy_ocid = "definir_aqui"
+  }
+}
+
 module "create_instance" {
-  source = "./modules/compute_instance" 
+  source = "./modules/compute_instance"
 
   availability_domain = var.availability_domain
   compartment_id      = var.compartment_id
@@ -16,7 +26,7 @@ module "create_instance" {
   hostname_label      = "bhocisrv24-tasyhml"
   user_data           = var.user_data
   tags = {
-        Ambiente = "Prod"
+    Ambiente = "Prod"
   }
 }
 
@@ -24,7 +34,7 @@ module "data_volume" {
   source              = "./modules/block_volume"
   availability_domain = var.availability_domain
   compartment_id      = var.compartment_id
-  display_name        = "DT_DISK${module.create_instance.display_name}"
+  display_name        = "DT_DISK_BHOCISRV24"
   size_in_gbs         = 155
   instance_id         = module.create_instance.instance_id
 }
@@ -34,20 +44,15 @@ module "data_volume" {
 output "volume_id" {
   description = "OCID do volume de dados criado."
   value       = module.data_volume.volume_id
-  
+
 }
 output "private_ip" {
   description = "Endereço IP privado da instância."
   value       = module.create_instance.instance_private_ip
-  
+
 }
 output "instance_id" {
   description = "OCID da instância criada."
   value       = module.create_instance.instance_id
 }
 
-terraform {
-  backend "oci" {
-    source = ".backend_oci/backend.tf"
-  }
-}
