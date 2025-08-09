@@ -1,21 +1,21 @@
-#### Esse arquivo é o "Core" da stack, tendo o papel de criar uma instância de computação na OCI.
+#### Esse é o "Core" da stack, tendo o papel de criar uma instância de computação na OCI.
 
 
 terraform {
   backend "oci" {
-    bucket  = "terraform-state"
-    namespace    = "seu namespace"
-    region       = "sua região"
-    tenancy_ocid = "definir_aqui"
-  }
+    bucket = "terraform-state"
+    namespace = "ax7ghg0vcvtx"
+    region = "sa-vinhedo-1" 
+    tenancy_ocid = "ocid1.tenancy.oc1..aaaaaaaag6mpx4jqae3lxxvyg4z2fgtmmklvto4fjikffuqrnkqkhk2dyyya"
 }
-
+}
+    
 module "create_instance" {
   source = "./modules/compute_instance"
 
   availability_domain = var.availability_domain
   compartment_id      = var.compartment_id
-  display_name        = "BHOCISRV24 - TASYHML"
+  display_name        = "TERRAFORM-TEST"
   shape               = var.shape
   ocpus               = 2
   memory_in_gbs       = 16
@@ -23,7 +23,7 @@ module "create_instance" {
   assign_public_ip    = var.assign_public_ip
   ssh_public_key_path = var.ssh_public_key_path
   image_id            = var.image_id_oraclelinux
-  hostname_label      = "bhocisrv24-tasyhml"
+  hostname_label      = "TERRAFORM-TEST"
   user_data           = var.user_data
   tags = {
     Ambiente = "Prod"
@@ -34,7 +34,7 @@ module "data_volume" {
   source              = "./modules/block_volume"
   availability_domain = var.availability_domain
   compartment_id      = var.compartment_id
-  display_name        = "DT_DISK_BHOCISRV24"
+  display_name        = "DT_DISK_TEST"
   size_in_gbs         = 155
   instance_id         = module.create_instance.instance_id
 }
