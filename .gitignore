@@ -22,3 +22,4 @@ crash.log
 .terraform.tfstate.d/.terraform.tfstate.d/.terraform.tfstate.d/.terraform.tf
 .backend_oci/backend.hcl
 backend_oci/backend.hcl
+versions.tf

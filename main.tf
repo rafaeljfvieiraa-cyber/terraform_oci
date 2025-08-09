@@ -1,14 +1,5 @@
 #### Esse é o "Core" da stack, tendo o papel de criar uma instância de computação na OCI.
 
-
-terraform {
-  backend "oci" {
-    bucket = "terraform-state"
-    namespace = "ax7ghg0vcvtx"
-    region = "sa-vinhedo-1" 
-    tenancy_ocid = "ocid1.tenancy.oc1..aaaaaaaag6mpx4jqae3lxxvyg4z2fgtmmklvto4fjikffuqrnkqkhk2dyyya"
-}
-}
     
 module "create_instance" {
   source = "./modules/compute_instance"
@@ -39,7 +30,7 @@ module "data_volume" {
   instance_id         = module.create_instance.instance_id
 }
 
-
+#### aba de retorno das informações da instância e do volume de dados criados
 
 output "volume_id" {
   description = "OCID do volume de dados criado."
